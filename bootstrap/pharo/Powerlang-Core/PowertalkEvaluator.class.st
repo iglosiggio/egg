@@ -187,7 +187,9 @@ PowertalkEvaluator >> initializePrimitives [
 		at: #HostFixOverrides put: self primitiveHostFixOverrides;
 		at: #PrimeFor put: self primitivePrimeFor;
 		at: #FlushFromCaches put: self primitiveFlushFromCaches;
-		at: #PrepareForExecution put: self primitivePrepareForExecution
+		at: #PrepareForExecution put: self primitivePrepareForExecution;
+		at: #EvaluateEnsuring put: self primitiveEvaluateEnsuring;
+		at: #Show put: self primitiveShow
 ]
 
 { #category : #accessing }
@@ -386,6 +388,16 @@ PowertalkEvaluator >> primitiveClosureValueWithArgs [
 { #category : #primitives }
 PowertalkEvaluator >> primitiveEqual [
 	^ [ runtime booleanFor: context self = context firstArgument ]
+]
+
+{ #category : #primitives }
+PowertalkEvaluator >> primitiveEvaluateEnsuring [
+	^ [
+		| closure finally |
+		closure := context firstArgument.
+		finally := context secondArgument.
+		[ self evaluateClosure: closure ] ensure: [ self evaluateClosure: finally ]
+	]
 ]
 
 { #category : #primitives }
@@ -595,6 +607,16 @@ PowertalkEvaluator >> primitiveSetBehavior [
 	^ [ receiver := context self.
 	receiver behavior: context firstArgument.
 	receiver ]
+]
+
+{ #category : #primitives }
+PowertalkEvaluator >> primitiveShow [
+	^ [
+		| value |
+		value := context firstArgument.
+		Transcript show: value.
+		value
+	]
 ]
 
 { #category : #primitives }
