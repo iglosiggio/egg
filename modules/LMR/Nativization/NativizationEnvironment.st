@@ -17,6 +17,14 @@ Class {
 }
 
 { #category : #accessing }
+NativizationEnvironment class >> forTesting [
+	^NativizationEnvironment new
+		initialize;
+		"platform: NativizationPlatform x86_64_linux_gnu."
+		platform: NativizationPlatform x86_64_win32.
+]
+
+{ #category : #accessing }
 NativizationEnvironment class >> globalNames [
 	^#(Lookup LookupSuper WriteBarrier Safepoint SmallIntegerBehavior Invoke DebuggableLookup DebuggableLookupSuper)
 ]
@@ -129,11 +137,11 @@ NativizationEnvironment >> initialize [
 	messageLinker := CompositeMessageLinker new.
 	messageLinker add: InlineMessageLinker new.
 	globals := Array new: self class globalNames size.
-	self
+	"self
 		initializeGlobals;
 		inlinedMethods: self class inlinedMethods;
 		invokedMethods: self class invokedMethods;
-		optimizedMethods: self class optimizedMethods
+		optimizedMethods: self class optimizedMethods"
 ]
 
 { #category : #accessing }
