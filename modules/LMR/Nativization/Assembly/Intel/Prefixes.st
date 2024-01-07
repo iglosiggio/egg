@@ -1,6 +1,6 @@
 Class {
 	#name : #Prefixes,
-	#superclass : #PSharedPool,
+	#superclass : #Object,
 	#classVars : [
 		'AddressSize_Override',
 		'LOCK',

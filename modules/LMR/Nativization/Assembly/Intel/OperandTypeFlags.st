@@ -1,6 +1,6 @@
 Class {
 	#name : #OperandTypeFlags,
-	#superclass : #PSharedPool,
+	#superclass : #Object,
 	#classVars : [
 		'ConstantType',
 		'ImmediateType',

@@ -1,6 +1,6 @@
 Class {
 	#name : #InlineMessageLinkerFlags,
-	#superclass : #PSharedPool,
+	#superclass : #Object,
 	#classVars : [
 		'_ExtendedSize',
 		'_Flags',

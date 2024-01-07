@@ -1,6 +1,6 @@
 Class {
 	#name : #SendSiteFlags,
-	#superclass : #PSharedPool,
+	#superclass : #Object,
 	#classVars : [
 		'HasBeenReset',
 		'IsPolymorphic',
