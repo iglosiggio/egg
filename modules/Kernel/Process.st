@@ -22,3 +22,8 @@ Process >> wantsToStepInto [
 	^answer
 ]
 
+{ #category : #bugs }
+Process >> evaluate: aBlock ensuring: anotherBlock [
+	<primitive: EvaluateEnsuring>
+]
+
