@@ -486,3 +486,8 @@ ProtoObject >> yourself [
 	^self
 ]
 
+{ #category : #bugs }
+ProtoObject >> show: anObject [
+	<primitive: Show>
+]
+
