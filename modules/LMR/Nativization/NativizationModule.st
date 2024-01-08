@@ -13,6 +13,7 @@ Class {
 NativizationModule >> imports [
 	^{
 		#Assembly -> #Assembler.
+		#Compiler -> #AstcodeDecoder.
 		#Intel -> {#AMD64CodeGenerator. #SysVX64ABI. #WinX64ABI}.
 		#Kernel -> {
 			#Array. #ByteArray. #Character. #CharacterArray. #Class. #Closure.

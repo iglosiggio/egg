@@ -590,7 +590,12 @@ SExpressionNativizer >> nativeCode [
 
 { #category : #services }
 SExpressionNativizer >> nativize [
-	method sexpressions acceptVisitor: self.
+	| decoder sexpressions |
+	decoder := AstcodeDecoder new
+		stream: method astcodes readStream;
+		method: method.
+	sexpressions := decoder decodeMethod.
+	sexpressions acceptVisitor: self.
 	[remainingBlocks isEmpty]
 		whileFalse: [self nativizeBlock: remainingBlocks removeFirst]
 ]
