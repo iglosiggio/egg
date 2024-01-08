@@ -41,6 +41,53 @@ AstcodeDecoder class >> initialize [
 		at: NestedDynamicVarId put: NestedDynamicBinding
 ]
 
+{ #category : #'class initialization' }
+AstcodeDecoder class >> initializeTreecodeIds [
+	| named |
+	named := self addNamespaceAs: #TreecodeIds.
+	named
+		at: #MethodId put: 101;
+		at: #BlockId put: 102;
+		at: #IdentifierId put: 103;
+		at: #LiteralId put: 104;
+		at: #MessageId put: 105;
+		at: #CascadeId put: 106;
+		at: #BraceId put: 107;
+		at: #AssignmentId put: 108;
+		at: #ReturnId put: 109;
+		at: #PragmaId put: 110
+]
+
+{ #category : #'class initialization' }
+AstcodeDecoder class >> initializeBindingIds [
+	| named |
+	named := self addNamespaceAs: #BindingIds.
+	named
+		at: #NilId put: 1;
+		at: #TrueId put: 2;
+		at: #FalseId put: 3;
+		at: #ArgumentId put: 4;
+		at: #TemporaryId put: 5;
+		at: #SelfId put: 6;
+		at: #SuperId put: 7;
+		at: #DynamicVarId put: 14;
+		at: #NestedDynamicVarId put: 15;
+		at: #PushRid put: 50;
+		at: #PopRid put: 51
+]
+
+{ #category : #'class initialization' }
+AstcodeDecoder class >> initializeClosureElementIds [
+	| named |
+	named := self addNamespaceAs: #ClosureElementIds.
+	named
+		at: #Self put: 0;
+		at: #LocalArgument put: 1;
+		at: #Environment put: 2;
+		at: #EnvironmentValue put: 3
+]
+
+
 { #category : #'instance creation' }
 AstcodeDecoder class >> new [
 	"return an initialized instance"
