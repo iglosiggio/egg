@@ -139,7 +139,6 @@ AstcodeDecoder >> decodeBlock [
 				code := builder newExecutableCodeFor: expression.
 				builder blockExecutableCode: block put: code ].
 			expression
-				compiledCode: block;
 				index: index;
 				capturedVariables: self nextArray ].
 	expression statements: self nextExpressionArray.
@@ -192,7 +191,6 @@ AstcodeDecoder >> decodeLiteral [
 		ifTrue: [ self nextLiteralInteger ]
 		ifFalse: [ self literalAt: index ].
 	^ SLiteralNode new
-		index: index;
 		value: value
 ]
 
@@ -223,7 +221,6 @@ AstcodeDecoder >> decodeMethod [
 			pragma := SPragmaNode new name: self nextSymbolOrNil.
 			node pragma: pragma ].
 	node
-		compiledCode: method;
 		statements: self nextExpressionArray.
 	^ node
 ]
