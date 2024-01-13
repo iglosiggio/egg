@@ -12,6 +12,7 @@ Class {
 { #category : #spec }
 IntelModule >> imports [
 	^{
-		#Assembly -> {#ABI. #Assembler. #CodeGenerator}}
+		#Assembly -> {#ABI. #Assembler. #CodeGenerator}.
+		#Kernel -> #CharacterConstants}
 ] 
 
