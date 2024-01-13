@@ -12,9 +12,9 @@ Class {
 
 { #category : #initializing }
 CompilerModule >> justLoaded [
-	super justLoaded.
 	AstcodeDecoder initializeBindingIds; initializeTreecodeIds; initializeClosureElementIds; initialize.
-	AstcodeEncoder initializeBindingIds; initializeTreecodeIds; initializeClosureElementIds
+	AstcodeEncoder initializeBindingIds; initializeTreecodeIds; initializeClosureElementIds.
+	super justLoaded.
 ]
 
 { #category : #spec }
