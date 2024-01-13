@@ -289,8 +289,9 @@ ISAOperandType >> hasImmediateFlag [
 
 { #category : #initialization }
 ISAOperandType >> initializeConstantFlag [
-	type anyOne isDigit ifTrue: [self addFlag: ConstantType]
-
+	| isConstant |
+	isConstant := type anySatisfy: [:v | v isDigit].
+	isConstant ifTrue: [self addFlag: ConstantType]
 ]
 
 { #category : #initialization }
