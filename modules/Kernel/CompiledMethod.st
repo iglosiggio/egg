@@ -281,6 +281,11 @@ CompiledMethod >> isExpression [
 ]
 
 { #category : #testing }
+CompiledMethod >> isFrameless [
+	^false
+]
+
+{ #category : #testing }
 CompiledMethod >> isFFIMethod [
 	^false
 ]
