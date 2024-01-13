@@ -18,5 +18,9 @@ InlineMessageLinkerFlags class >> initialize [
 	_Hash := -8.
 	_Reserved := -2.
 	_ExtendedSize := -3.
+]
 
+{ #category : #'accessing' }
+InlineMessageLinkerFlags class >> asNamespace [
+	^ self classVariables
 ]

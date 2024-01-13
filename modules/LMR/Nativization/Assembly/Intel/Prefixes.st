@@ -17,7 +17,7 @@ Class {
 	#category : #'Powerlang-Core-Assembler-Intel'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'initialization' }
 Prefixes class >> initialize [
 	LOCK := LegacyPrefix basicNew
 		instVarAt: 1 put: 'LOCK';
@@ -68,4 +68,9 @@ Prefixes class >> initialize [
 		instVarAt: 2 put: 1;
 		instVarAt: 3 put: 243;
 		yourself
+]
+
+{ #category : #'accessing' }
+Prefixes class >> asNamespace [
+	^ self classVariables
 ]

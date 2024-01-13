@@ -15,16 +15,20 @@ Class {
 	#category : #'Powerlang-Core-Assembler-Intel'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'initialization' }
 OperandTypeFlags class >> initialize [ 
-MemoryType := 4.
-RegisterGroupMask := 3840.
-ConstantType := 2.
-RegisterSIMD := 256.
-ImmediateType := 1.
-RegisterGP := 0.
-RegisterType := 8.
-RegisterSegment := 512.
-RegisterSpecific := 768.
+	MemoryType := 4.
+	RegisterGroupMask := 3840.
+	ConstantType := 2.
+	RegisterSIMD := 256.
+	ImmediateType := 1.
+	RegisterGP := 0.
+	RegisterType := 8.
+	RegisterSegment := 512.
+	RegisterSpecific := 768.
+]
 
+{ #category : #'accessing' }
+OperandTypeFlags class >> asNamespace [
+	^ self classVariables
 ]

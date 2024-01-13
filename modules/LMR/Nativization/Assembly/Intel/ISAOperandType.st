@@ -14,10 +14,6 @@ Class {
 	#classVars : [
 		'Types'
 	],
-	#pools : [
-		'OperandTypeFlags',
-		'Registers'
-	],
 	#category : #'Powerlang-Core-Assembler-Intel'
 }
 
@@ -44,6 +40,8 @@ ISAOperandType class >> immediateTypes [
 { #category : #initialization }
 ISAOperandType class >> initialize [
 	OperandTypeFlags initialize.
+	self addNamespace: OperandTypeFlags asNamespace.
+	self addNamespace: Registers asNamespace.
 	self initializeTypes
 
 ]

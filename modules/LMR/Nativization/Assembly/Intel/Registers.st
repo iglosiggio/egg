@@ -125,3 +125,9 @@ Class {
 Registers class >> initialize [ 
 	"Nothing to be done here, the initialization is done in Register class >> initializeRegisters."
 ]
+
+
+{ #category : #'accessing' }
+Registers class >> asNamespace [
+	^ self classVariables
+]

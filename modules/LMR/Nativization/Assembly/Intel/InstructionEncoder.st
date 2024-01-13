@@ -23,9 +23,6 @@ Class {
 	#classVars : [
 		'Cache'
 	],
-	#pools : [
-		'Registers'
-	],
 	#category : #'Powerlang-Core-Assembler-Intel'
 }
 
@@ -41,8 +38,8 @@ InstructionEncoder class >> checkCache64 [
 
 { #category : #initialization }
 InstructionEncoder class >> initialize [
+	self addNamespace: Registers asNamespace.
 	self initializeCache
-
 ]
 
 { #category : #initialization }

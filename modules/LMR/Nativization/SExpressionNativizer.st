@@ -12,11 +12,20 @@ Class {
 		'activeScript',
 		'ir'
 	],
-	#pools : [
-		'ClosureElementTypes'
-	],
 	#category : #'Powerlang-Core-Nativization'
 }
+
+{ #category : #'initialization' }
+SExpressionNativizer class >> initialize [
+	| named |
+	"TODO: Move to its own namespace-class and cleanup Compiler/Astcode{Decode,Encode}.st"
+	named := self addNamespaceAs: #ClosureElementTypes.
+	named
+		at: #Self put: 0;
+		at: #LocalArgument put: 1;
+		at: #Environment put: 2;
+		at: #EnvironmentValue put: 3
+]
 
 { #category : #'instance creation' }
 SExpressionNativizer class >> assemblyFor: aCompiledMethod [

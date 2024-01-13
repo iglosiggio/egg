@@ -11,11 +11,13 @@ Class {
 		'operands',
 		'template'
 	],
-	#pools : [
-		'Registers'
-	],
 	#category : #'Powerlang-Core-Assembler-Intel'
 }
+
+{ #category : #'initialization' }
+ISAInstruction class >> initialize [
+	self addNamespace: Registers asNamespace.
+]
 
 { #category : #'instance creation' }
 ISAInstruction class >> db: byte [

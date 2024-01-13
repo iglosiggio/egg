@@ -11,11 +11,13 @@ Class {
 	#classVars : [
 		'Signatures'
 	],
-	#pools : [
-		'CharacterConstants'
-	],
 	#category : #'Powerlang-Core-Assembler-Intel'
 }
+
+{ #category : #initialization }
+VEXPrefix class >> initialize [
+	self addNamespace: CharacterConstants asNamespace.
+]
 
 { #category : #accessing }
 VEXPrefix class >> b [

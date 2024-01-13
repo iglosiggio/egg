@@ -12,11 +12,13 @@ Class {
 		'displacement',
 		'segment'
 	],
-	#pools : [
-		'Registers'
-	],
 	#category : #'Powerlang-Core-Assembler-Intel'
 }
+
+{ #category : #'initialize' }
+MemoryOperand class >> initialize [
+	self addNamespace: Registers asNamespace.
+]
 
 { #category : #'instance creation' }
 MemoryOperand class >> fromStream: aStream [

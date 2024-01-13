@@ -8,11 +8,13 @@ Class {
 	#instVars : [
 		'name'
 	],
-	#pools : [
-		'Prefixes'
-	],
 	#category : #'Powerlang-Core-Assembler-Intel'
 }
+
+{ #category : #'initialization' }
+InstructionPrefix class >> initialize [
+	self addNamespace: Prefixes asNamespace.
+]
 
 { #category : #private }
 InstructionPrefix class >> classFor: aString [

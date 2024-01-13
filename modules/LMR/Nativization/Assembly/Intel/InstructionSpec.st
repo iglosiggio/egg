@@ -30,9 +30,6 @@ Class {
 	#classVars : [
 		'Specs'
 	],
-	#pools : [
-		'CharacterConstants'
-	],
 	#category : #'Powerlang-Core-Assembler-Intel'
 }
 
@@ -96,6 +93,7 @@ InstructionSpec class >> fromString: aString [
 
 { #category : #initialization }
 InstructionSpec class >> initialize [
+	self addNamespace: CharacterConstants asNamespace.
 	OperandEncoding initializeEncodings.
 	Prefixes initialize.
 	VEXPrefix initializeSignatures.

@@ -15,11 +15,13 @@ Class {
 	#classVars : [
 		'Encodings'
 	],
-	#pools : [
-		'Registers'
-	],
 	#category : #'Powerlang-Core-Assembler-Intel'
 }
+
+{ #category : #'initialize' }
+OperandEncoding class >> initialize [
+	self addNamespace: Registers asNamespace.
+]
 
 { #category : #initialization }
 OperandEncoding class >> commentEncodingMethods [

@@ -8,11 +8,14 @@ Class {
 		'tally',
 		'format'
 	],
-	#pools : [
-		'SendSiteFlags'
-	],
 	#category : #'Powerlang-Core-Nativization'
 }
+
+{ #category : #'initialization' }
+SendSite class >> initialize [
+	self addNamespace: SendSiteFlags asNamespace.
+]
+
 
 { #category : #accessing }
 SendSite >> beSuperSend [

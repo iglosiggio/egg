@@ -11,10 +11,6 @@ Class {
 		'family',
 		'flags'
 	],
-	#pools : [
-		'OperandTypeFlags',
-		'Registers'
-	],
 	#category : #'Powerlang-Core-Assembler-Intel'
 }
 
@@ -25,6 +21,8 @@ Register class >> addRegister: aRegister [
 
 { #category : #initialization }
 Register class >> initialize [
+	self addNamespace: OperandTypeFlags asNamespace.
+	self addNamespace: Registers asNamespace.
 	self initializeRegisters; initializeFamilies
 ]
 

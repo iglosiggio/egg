@@ -14,11 +14,13 @@ Class {
 		'immediate',
 		'encoder'
 	],
-	#pools : [
-		'Registers'
-	],
 	#category : #'Powerlang-Core-Assembler-Intel'
 }
+
+{ #category : #'initialization' }
+AMD64CodeGenerator class >> initialize [
+	self addNamespace: Registers asNamespace.
+]
 
 { #category : #'instance creation' }
 AMD64CodeGenerator class >> new [

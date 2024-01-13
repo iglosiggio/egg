@@ -5,12 +5,14 @@ Class {
 		'assembler',
 		'map'
 	],
-	#pools : [
-		'InlineMessageLinkerFlags',
-		'Registers'
-	],
 	#category : #'Powerlang-Core-Nativization'
 }
+
+{ #category : #'initialization' }
+InlineMessageLinker class >> initialize [
+	self addNamespace: InlineMessageLinkerFlags asNamespace.
+	self addNamespace: Registers asNamespace.
+]
 
 { #category : #private }
 InlineMessageLinker class >> supported [

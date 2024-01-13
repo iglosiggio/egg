@@ -5,11 +5,13 @@ Copyright (c) 2020 Aucerna.
 Class {
 	#name : #X86ABI,
 	#superclass : #ABI,
-	#pools : [
-		'Registers'
-	],
 	#category : #'Powerlang-Core-Assembler-Intel'
 }
+
+{ #category : #initialization }
+X86ABI class >> initialize [
+	self addNamespace: Registers asNamespace.
+]
 
 { #category : #accessing }
 X86ABI >> bits [
