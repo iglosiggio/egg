@@ -9,6 +9,12 @@ Class {
 	#category : #Assembly
 }
 
+{ #category : #initializing }
+AssemblyModule >> justLoaded [
+	super justLoaded.
+	Assembler initialize.
+]
+
 { #category : #spec }
 AssemblyModule >> imports [
 	^{

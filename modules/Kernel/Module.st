@@ -188,7 +188,6 @@ Module >> justDefined: aSymbol [
 { #category : #services }
 Module >> justLoaded [
 	classes reject: [:cls | classes includes: cls superclass ] thenDo: [:cls | cls superclass addSubclass: cls].
-	classes do: [ :cls | cls initialize ]
 ]
 
 { #category : #accessing }
