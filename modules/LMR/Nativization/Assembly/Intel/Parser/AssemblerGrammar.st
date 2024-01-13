@@ -142,7 +142,7 @@ AssemblerGrammar >> prefix [
 AssemblerGrammar >> reg [
 	^ (PPChoiceParser
 		withAll:
-			((Registers asArray sort: [ :a :b | a name size > b name size ])
+			((Registers asNamespace asArray sort: [ :a :b | a name size > b name size ])
 				collect: [ :r | r name asParser ])) flatten
 ]
 

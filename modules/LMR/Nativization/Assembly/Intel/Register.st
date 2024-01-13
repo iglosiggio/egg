@@ -16,7 +16,7 @@ Class {
 
 { #category : #private }
 Register class >> addRegister: aRegister [
-	Registers at: aRegister name put: aRegister
+	Registers asNamespace at: aRegister name asSymbol put: aRegister
 ]
 
 { #category : #initialization }
@@ -87,7 +87,7 @@ Register class >> initialize8BitRexRegisters [
 
 { #category : #initialization }
 Register class >> initializeFamilies [
-	Registers do: [:reg | reg initializeFamily]
+	Registers asNamespace do: [:reg | reg initializeFamily]
 ]
 
 { #category : #initialization }
@@ -166,7 +166,7 @@ Register class >> named: aString [
 	"
 	Register named: 'rax'
 	"
-	^Registers at: aString asLowercase ifAbsent: nil
+	^Registers asNamespace at: aString asLowercase asSymbol ifAbsent: nil
 ]
 
 { #category : #accessing }
@@ -182,7 +182,7 @@ Register class >> segment: index [
 
 { #category : #accessing }
 Register class >> withIndex: index length: length [
-	^Registers detect: [:r | 
+	^Registers asNamespace detect: [:r |
 		r index = index
 			and: [r length = length]
 			and: [(r name beginsWith: 'mmx') not]
@@ -191,7 +191,7 @@ Register class >> withIndex: index length: length [
 
 { #category : #accessing }
 Register class >> withIndex: index length: length long: aBoolean [
-	^Registers detect: [:r | 
+	^Registers asNamespace detect: [:r |
 		r index = index
 			and: [r length = length]
 			and: [(r name beginsWith: 'mmx') not]

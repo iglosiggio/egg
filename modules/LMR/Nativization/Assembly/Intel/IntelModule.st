@@ -22,7 +22,7 @@ IntelModule >> justLoaded [
 	OperandEncoding initialize.
 	OperandTypeFlags initialize.
 	"Prefixes initialize."
-	"Register initialize."
+	Register initialize.
 	Registers initialize.
 	VEXPrefix initialize.
 	X64ABI initialize.
