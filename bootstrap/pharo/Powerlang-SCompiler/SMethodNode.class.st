@@ -77,32 +77,40 @@ SMethodNode >> isMethod [
 { #category : #parsing }
 SMethodNode >> literals [
 	| literals v l |
-	literals := OrderedCollection new.
+   "Pharo thinks symbols and strings are the same. We disagree"
+	literals := Set new.
 	pragma isUsed
-		ifTrue: [ literals add: pragma name ].
+		ifTrue: [ | name |
+			name := pragma name.
+			literals add: name -> name class ].
 	self
 		nodesDo: [ :n | 
 			n isLiteral
 				ifTrue: [ v := n value.
 					v isSmallInteger
-						ifFalse: [ literals add: v ] ].
+						ifFalse: [ literals add: v -> v class ] ].
 			n isMessageNode
-				ifTrue: [ literals add: n symbol ].
+				ifTrue: [ | symbol |
+					symbol := n symbol.
+					literals add: symbol -> symbol class ].
 			n isBraceNode
 				ifTrue: [ n isLiteral
 						ifTrue: [ self halt ]
 						ifFalse: [ literals
-								add: #Array;
-								add: #new:;
-								add: #at:put:;
-								add: #yourself ] ].
+								add: #Array -> #Array class;
+								add: #new: -> #new: class;
+								add: #at:put: -> #at:put: class;
+								add: #yourself -> #yourself class ] ].
 			(n isIdentifier
 				and: [ l := n binding literal.
 					l notNil ])
-				ifTrue: [ literals add: l ].
+				ifTrue: [ literals add: l -> l class ].
 			(n isBlockNode andNot: [ n isInlined ])
-				ifTrue: [ literals add: n buildBlock ] ].
-	^ literals removeDuplicates
+				ifTrue: [ | buildBlock |
+					buildBlock := n buildBlock.
+					literals add: buildBlock -> buildBlock class ] ].
+   
+	^ literals collect: [ :n | n key ] into: OrderedCollection new.
 ]
 
 { #category : #parsing }
