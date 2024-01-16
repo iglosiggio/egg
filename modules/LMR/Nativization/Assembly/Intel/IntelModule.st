@@ -21,7 +21,7 @@ IntelModule >> justLoaded [
 	MemoryOperand initialize.
 	OperandEncoding initialize.
 	OperandTypeFlags initialize.
-	"Prefixes initialize."
+	Prefixes initialize.
 	Register initialize.
 	Registers initialize.
 	VEXPrefix initialize.
