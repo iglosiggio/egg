@@ -61,7 +61,7 @@ InstructionPrefix class >> peekFrom: aStream [
 
 { #category : #services }
 InstructionPrefix class >> prefixes [
-	^Prefixes
+	^Prefixes asNamespace
 ]
 
 { #category : #testing }

@@ -26,7 +26,7 @@ LegacyPrefix class >> initializeGroup1 [
 				group: 1;
 				value: pair first;
 				name: names first.
-			names do: [:aka | Prefixes at: aka put: prefix]]
+			names do: [:aka | Prefixes asNamespace at: aka put: prefix]]
 ]
 
 { #category : #initialization }
@@ -37,13 +37,13 @@ LegacyPrefix class >> initializeGroup2 [
 				group: 2;
 				value: pair first;
 				name: pair second , ' segment override'.
-			self disableCode: [Prefixes at: prefix name put: prefix]].
+			self disableCode: [Prefixes asNamespace at: prefix name put: prefix]].
 	#(#(0x2E 'not') #(0x3E '')) do: [:pair | | prefix |
 		prefix := self new
 			group: 2;
 			value: pair first;
 			name: 'Branch ' , pair second , ' taken'.
-		self disableCode: [Prefixes at: prefix name put: prefix]]
+		self disableCode: [Prefixes asNamespace at: prefix name put: prefix]]
 ]
 
 { #category : #initialization }
@@ -53,7 +53,7 @@ LegacyPrefix class >> initializeGroup3 [
 		group: 3;
 		value: 16r66;
 		name: 'OperandSize_Override'.
-	Prefixes at: prefix name put: prefix
+	Prefixes asNamespace at: prefix name put: prefix
 ]
 
 { #category : #initialization }
@@ -63,7 +63,7 @@ LegacyPrefix class >> initializeGroup4 [
 		group: 4;
 		value: 16r67;
 		name: 'AddressSize_Override'.
-	Prefixes at: prefix name put: prefix
+	Prefixes asNamespace at: prefix name put: prefix
 ]
 
 { #category : #initialization }
@@ -83,7 +83,7 @@ LegacyPrefix class >> operandSizeOverride [
 
 { #category : #accessing }
 LegacyPrefix class >> withValue: byte [
-	^Prefixes
+	^Prefixes asNamespace
 		detect: [:prefix | prefix isLegacy and: [prefix value = byte]]
 		ifNone: nil
 ]

@@ -34,7 +34,7 @@ REXPrefix class >> initializePrefixes [
 		do: [ :s | 
 			| rex |
 			rex := self new name: s.
-			Prefixes at: s put: rex ].
+			Prefixes asNamespace at: s put: rex ].
 	super initializePrefixes.
 	self	compileAll.
 	self class compileAll.
