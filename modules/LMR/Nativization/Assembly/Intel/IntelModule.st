@@ -17,7 +17,6 @@ IntelModule >> justLoaded [
 	ISAOperandType initialize.
 	InstructionEncoder initialize.
 	InstructionPrefix initialize.
-	"InstructionSpec initialize."
 	MemoryOperand initialize.
 	OperandEncoding initialize.
 	OperandTypeFlags initialize.
@@ -27,6 +26,7 @@ IntelModule >> justLoaded [
 	VEXPrefix initialize.
 	X64ABI initialize.
 	X86ABI initialize.
+	InstructionSpec initialize.
 ]
 
 { #category : #spec }

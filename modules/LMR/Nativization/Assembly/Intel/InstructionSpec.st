@@ -99,7 +99,7 @@ InstructionSpec class >> initialize [
 	VEXPrefix initializeSignatures.
 	ISAOperandType initialize.
 	self initializeSpecs.
-	Smalltalk at: #Decoder64 ifPresent: [ :d | d initializeSpecs ]
+	"Smalltalk at: #Decoder64 ifPresent: [ :d | d initializeSpecs ]"
 
 ]
 
