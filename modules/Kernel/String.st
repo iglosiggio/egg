@@ -65,6 +65,11 @@ String class >> new: anInteger [
 	^self primitiveNewBytes: anInteger + 1
 ]
 
+{ #category : #'instance creation' }
+String class >> new [
+	^self primitiveNewBytes: 1
+]
+
 { #category : #gs }
 String class >> newFrom: aByteArray [
 	| string |
