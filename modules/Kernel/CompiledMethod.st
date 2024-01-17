@@ -282,7 +282,7 @@ CompiledMethod >> isExpression [
 
 { #category : #testing }
 CompiledMethod >> isFrameless [
-	^false
+	^self hasFrame not
 ]
 
 { #category : #testing }
