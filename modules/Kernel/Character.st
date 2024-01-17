@@ -576,6 +576,13 @@ Character >> isDigit [
 ]
 
 { #category : #testing }
+Character >> isHexDigit [
+	^self isDigit "0123456789"
+		or: [value >= 65 and: [value <= 70]] "ABCDEF"
+		or: [value >= 97 and: [value <= 102]] "abcdef"
+]
+
+{ #category : #testing }
 Character >> isDollar [
 	^value = 36
 ]
