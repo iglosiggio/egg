@@ -853,8 +853,8 @@ SExpressionNativizer >> visitMessage: anSMessage [
 	| arguments index |
 	anSMessage isInlined
 		ifTrue: [ ^ self visitInlinedMessage: anSMessage ].
-	anSMessage isOptimized
-		ifTrue: [ ^ self visitOptimizedMessage: anSMessage ].
+	"anSMessage isOptimized
+		ifTrue: [ ^ self visitOptimizedMessage: anSMessage ]."
 	anSMessage receiver acceptVisitor: self.
 	arguments := anSMessage arguments.
 	arguments isEmpty
