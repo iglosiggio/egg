@@ -204,6 +204,11 @@ CompiledMethod >> hasBlocks [
 ]
 
 { #category : #accessing }
+CompiledMethod >> hasFrame [
+	^(format bitAnd: HasFrame) isZero not
+]
+
+{ #category : #accessing }
 CompiledMethod >> hasEnvironment: aBoolean [
 	format := aBoolean
 				ifTrue: [ format bitOr: HasEnvironment ]
