@@ -22,12 +22,6 @@ PowertalkRingRuntime class >> new [
 
 ]
 
-{ #category : #services }
-PowertalkRingRuntime >> argumentCountOf: anObjectMap [
-self halt.
-	^ anObjectMap argumentCount
-]
-
 { #category : #accessing }
 PowertalkRingRuntime >> arrayedSizeOf: anObjectMap [
 	^anObjectMap arrayedSize
@@ -111,6 +105,12 @@ PowertalkRingRuntime >> doLookup: aSymbol startingAt: aBehavior [
 { #category : #accessing }
 PowertalkRingRuntime >> executableCodeWork: code [
 	^code
+]
+
+{ #category : #services }
+PowertalkRingRuntime >> extensionMethodModule: method [
+
+	^ method module
 ]
 
 { #category : #services }
@@ -242,6 +242,12 @@ PowertalkRingRuntime >> methodExecutableCode: method put: anObject [
 PowertalkRingRuntime >> methodFor: aSymbol in: anRGBehavior [
 	overrides at: anRGBehavior->aSymbol ifPresent: [:m | ^m].
 	^anRGBehavior methodNamed: aSymbol
+]
+
+{ #category : #services }
+PowertalkRingRuntime >> methodIsExtension: method [
+
+	^ method isExtension
 ]
 
 { #category : #services }

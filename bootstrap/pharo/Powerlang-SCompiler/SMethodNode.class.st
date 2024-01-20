@@ -102,7 +102,7 @@ SMethodNode >> literals [
 				ifTrue: [ literals add: l ].
 			(n isBlockNode andNot: [ n isInlined ])
 				ifTrue: [ literals add: n buildBlock ] ].
-   "Pharo thinks symbols and strings are the same. We disagree"
+	"Pharo thinks symbols and strings are the same. We disagree"
 	literalsWithClasses := literals collect: [ :n | n -> n class ].
 	literalsWithClasses removeDuplicates.
 	^ literalsWithClasses collect: [ :n | n key ].

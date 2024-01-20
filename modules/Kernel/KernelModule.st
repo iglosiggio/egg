@@ -117,6 +117,11 @@ KernelModule >> load: aSymbol [
 ]
 
 { #category : #accessing }
+KernelModule >> loadedModules [
+	^loadedModules
+]
+
+{ #category : #accessing }
 KernelModule >> memory [
 	^memory
 ]

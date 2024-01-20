@@ -16,6 +16,13 @@ Class {
 	#category : #'Powerlang-Core-Execution'
 }
 
+{ #category : #services }
+PowertalkRuntime >> argumentCountOf: code [
+	^(self isBlock: code)
+		        ifTrue: [ self blockArgumentCount: code ]
+		        ifFalse: [ self methodArgumentCount: code ]
+]
+
 { #category : #accessing }
 PowertalkRuntime >> behaviorOf: anObject [
 	^self subclassResponsibility
@@ -51,6 +58,12 @@ PowertalkRuntime >> evaluatePrimitiveHash: receiver [
 PowertalkRuntime >> executableCodeWork: anLMRExecutableCode [
 
 	^ self subclassResponsibility
+]
+
+{ #category : #services }
+PowertalkRuntime >> extensionMethodModule: method [
+
+	self subclassResponsibility
 ]
 
 { #category : #initialization }
@@ -152,6 +165,21 @@ PowertalkRuntime >> methodEnvironmentSize: anObject [
 	^self subclassResponsibility
 ]
 
+{ #category : #services }
+PowertalkRuntime >> methodIsExtension: method [
+		self subclassResponsibility 
+]
+
+{ #category : #services }
+PowertalkRuntime >> methodModule: method [
+	| species |
+	^(self methodIsExtension: method)
+		ifTrue: [ self extensionMethodModule: method ]
+		ifFalse: [ 
+	species := self methodClassBinding: method.
+	self speciesModule: species].
+]
+
 { #category : #accessing }
 PowertalkRuntime >> newBootstrapDictionaryOf: receiver [
 	^ self subclassResponsibility
@@ -238,6 +266,12 @@ PowertalkRuntime >> speciesFor: anObject [
 { #category : #accessing }
 PowertalkRuntime >> speciesInstanceBehavior: class [
 ^	self subclassResponsibility 
+]
+
+{ #category : #services }
+PowertalkRuntime >> speciesModule: method [
+
+	self subclassResponsibility
 ]
 
 { #category : #accessing }

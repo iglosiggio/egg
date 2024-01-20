@@ -49,7 +49,7 @@ Object.prototype.initialize = function() { return this;}
 Object.prototype.basicNew = function() { return new this; }
 Object.prototype.new = function() { const obj = new this; obj.initialize(); return obj; }
 Object.prototype.class = function() { return this.constructor; }
-
+Object.prototype.asString = function() { return this.toString(); }
 
 // add some Smalltalk-ish methods to JS booleans
 
@@ -101,6 +101,7 @@ Array.prototype.detect_ = function(block) { return this.find(block); }
 
 String.prototype.asSymbol = function() { return this; }
 String.prototype.asString = function() { return this; }
+String.prototype._comma = function(string) { return this.concat(string); }
 
 Array.prototype.add_ = function(object) { return this.push(object); }
 Array.prototype._comma = function(array) { return this.concat(array); }
@@ -218,16 +219,19 @@ Number.prototype._times = function(value) { return this * value; }
 Number.prototype._slash = function(value) { return this / value; }
 Number.prototype._modulo = function(value) { return this % value; }
 Number.prototype._integerQuotient = function(value) { return Math.floor(this / value); }
-Number.prototype._and = function(value) { return this & value; }
-Number.prototype._or = function(value) { return this | value; }
-Number.prototype.bitAnd_ = function(value) { return this & value; }
-Number.prototype.bitOr_ = function(value) { return this | value; }
-Number.prototype.bitXor_ = function(value) { return this ^ value; }
-Number.prototype.bitShift_ = function(value) { return value > 0 ? this << value : this >> -value; }
-Number.prototype._shiftLeft = function(value) { return this << value; }
-Number.prototype._shiftRight = function(value) { return this >> value; }
-Number.prototype.anyMask_ = function(value) { return (this & value) != 0; }
-Number.prototype.noMask_ = function(value) { return (this & value) == 0; }
+Number.prototype._and = function(value) { return this.bitAnd_(value); }
+Number.prototype._or = function(value) { return this.bitOr_(value); }
+Number.prototype.bitAnd_ = function(value) { return Number(BigInt(this) & BigInt(value)); }
+Number.prototype.bitOr_ = function(value) { return Number(BigInt(this) | BigInt(value)); }
+Number.prototype.bitXor_ = function(value) { return Number(BigInt(this) ^ BigInt(value)); }
+Number.prototype.bitShift_ = function(value) {
+	return value > 0 ?
+		Number(BigInt(this) << BigInt(value)) :
+		Number(BigInt(this) >> BigInt(-value)); }
+Number.prototype._shiftLeft = function(value) { return Number(BigInt(this) << BigInt(value)); }
+Number.prototype._shiftRight = function(value) { return Number(BigInt(this) >> BigInt(value)); }
+Number.prototype.anyMask_ = function(value) { return (this.bitAnd_(value)) != 0; }
+Number.prototype.noMask_ = function(value) { return (this.bitAnd_(value)) == 0; }
 
 Number.prototype.timesRepeat_ = function(closure) { for (let i = 0; i < this; i++) { closure(); } }
 Number.prototype.to_do_ = function(limit, closure) { for (let i = this; i <= limit; i++) { closure(i); } }

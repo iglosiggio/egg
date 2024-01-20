@@ -72,6 +72,12 @@ PowertalkLMR >> arrayedSizeOf: anLMRObject [
 ]
 
 { #category : #initialization }
+PowertalkLMR >> associationValue: association [
+
+	^association slotAt: 2
+]
+
+{ #category : #initialization }
 PowertalkLMR >> behaviorClass: anLMRObject [
 	^ anLMRObject slotAt: behaviorClassIndex
 ]
@@ -273,6 +279,13 @@ PowertalkLMR >> doLookup: aSymbol startingAt: aBehavior [
 PowertalkLMR >> executableCodeWork: anLMRExecutableCode [
 	self ASSERT: anLMRExecutableCode !== nilObj.
 	^anLMRExecutableCode code
+]
+
+{ #category : #initialization }
+PowertalkLMR >> extensionMethodModule: anLMRObject [
+	| association |
+	association := anLMRObject slotAt: anLMRObject size.
+	^ self associationValue: association
 ]
 
 { #category : #initialization }
@@ -491,6 +504,14 @@ PowertalkLMR >> methodFor: aSymbol in: behavior [
 { #category : #initialization }
 PowertalkLMR >> methodInstSize: anInteger [
 	methodInstSize := anInteger
+]
+
+{ #category : #initialization }
+PowertalkLMR >> methodIsExtension: anLMRObject [
+
+	| flags |
+	flags := anLMRObject slotAt: methodFlagsIndex.
+	^ flags value anyMask: IsExtension
 ]
 
 { #category : #initialization }
@@ -926,12 +947,16 @@ PowertalkLMR >> superBehaviorOf: class [
 
 { #category : #initialization }
 PowertalkLMR >> symbolFromLocal: aSymbol [
+
 	| bytes table symbol |
-	knownSymbols at: aSymbol ifPresent: [ :s | ^s ].
-	bytes := aSymbol asByteArray, #[0].
+	knownSymbols at: aSymbol ifPresent: [ :s | ^ s ].
+	bytes := aSymbol asByteArray , #[ 0 ].
 	table := symbolTable slotAt: 2.
-	2 to: table size do: [:i | symbol := table slotAt: i. symbol == nilObj ifFalse: [symbol bytes = bytes ifTrue: [ ^symbol ] ] ].
-	self error: 'symbol not found'
+	2 to: table size do: [ :i | 
+		symbol := table slotAt: i.
+		symbol == nilObj ifFalse: [ 
+			symbol bytes = bytes ifTrue: [ ^ symbol ] ] ].
+	PowertalkEvaluatorError signal: 'symbol not found' on: interpreter context
 ]
 
 { #category : #initialization }

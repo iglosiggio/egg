@@ -39,7 +39,8 @@ CompiledMethod class >> initializeFormatFlags [
 		at: #HasEnvironment put: (1 bitShift: 23 - 1);
 		at: #HasFrame put: (1 bitShift: 24 - 1);
 		at: #Debuggable put: (1 bitShift: 25 - 1);
-		at: #EnvCount put: (26 thru: 31)
+		at: #EnvCount put: (26 thru: 31);
+		at: #IsExtension put: (1 bitShift: 32 - 1)
 ]
 
 { #category : #initialization }
@@ -93,9 +94,30 @@ CompiledMethod >> argumentCount: anInteger [
 	format := format bitsAt: ArgCount put: anInteger
 ]
 
+{ #category : #copying }
+CompiledMethod >> asExtensionFor: aModule [
+	"Note: keep in mind that this service breaks the relationship between the receiver and its blocks."
+	| extension |
+	extension := self class withAll: self literals , {#module -> aModule}.
+	extension
+		format: format;
+		beExtension;
+		selector: selector;
+		sourceObject: source;
+		classBinding: class;
+		astcodes: astcodes.
+	extension blocks do: [:block | block method: extension].
+	^extension
+]
+
 { #category : #converting }
 CompiledMethod >> asOverridden [
 	^self
+]
+
+{ #category : #accessing }
+CompiledMethod >> beExtension [
+	format := format bitOr: IsExtension
 ]
 
 { #category : #accessing }
@@ -135,6 +157,11 @@ CompiledMethod >> astcodes: aByteArray [
 { #category : #testing }
 CompiledMethod >> canBeInstalled [
 	^self isExpression not
+]
+
+{ #category : #testing }
+CompiledMethod >> capturesSelf [
+	^format isOnBit: CapturesSelf
 ]
 
 { #category : #accessing }
@@ -302,6 +329,11 @@ CompiledMethod >> isCalloutMethod [
 ]
 
 { #category : #testing }
+CompiledMethod >> isExtension [
+	^format isOnBit: IsExtension
+]
+
+{ #category : #testing }
 CompiledMethod >> isFFIMethod [
 	^false
 ]
@@ -335,6 +367,16 @@ CompiledMethod >> literals [
 { #category : #accessing }
 CompiledMethod >> method [
 	^self
+]
+
+{ #category : #inquiries }
+CompiledMethod >> module [
+	| association |
+	self isExtension ifFalse: [^class module].
+ 	association := self last.
+	(association isAssociation and: [association key == #module])
+		ifFalse: [self error: 'extension method ', self signature , ' without module'].
+	^association value
 ]
 
 { #category : #accessing }
@@ -407,6 +449,11 @@ CompiledMethod >> selectorAt: index [
 { #category : #accessing }
 CompiledMethod >> sendSites [
 	^optimizedCode sendSites
+]
+
+{ #category : #inquiries }
+CompiledMethod >> signature [
+	^class -> selector
 ]
 
 { #category : #'source code support' }

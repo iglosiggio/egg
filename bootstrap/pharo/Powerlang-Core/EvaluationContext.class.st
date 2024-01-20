@@ -158,10 +158,11 @@ EvaluationContext >> staticBindingFor: aSymbol [
 
 { #category : #accessing }
 EvaluationContext >> staticBindingFor: symbol inModule: module [
-	|  namespace assoc |
+
+	| namespace assoc |
 	namespace := system moduleNamespace: module.
 	assoc := system lookupAssociationFor: symbol in: namespace.
-	assoc ifNil: [ self error: 'unbound variable: ' , symbol asString ].
+	assoc ifNil: [ PowertalkEvaluatorError signal: 'unbound variable: ' , symbol asString on: self ].
 	^ SAssociationBinding new association: assoc
 ]
 
@@ -190,9 +191,8 @@ EvaluationContext >> staticBindingForIvar: aSymbol [
 
 { #category : #accessing }
 EvaluationContext >> staticBindingForMvar: symbol [
-	| species module |
-	species := system methodClassBinding: self method.
-	module := system speciesModule: species.
+	| module |
+	module := system methodModule: self method.
 	^ self staticBindingFor: symbol inModule: module
 ]
 
