@@ -11,6 +11,7 @@ Package { #name : #'Nativization-Assembly',
 		'AssemblyModule',
 		'CodeGenerator',
 		'NativeCodeReference',
+		"'NativeCode',"
 		'RISCCodeGenerator',
 		'RelocatableBuffer',
 		'RelocationFixup'

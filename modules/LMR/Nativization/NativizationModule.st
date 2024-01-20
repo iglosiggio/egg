@@ -24,7 +24,7 @@ NativizationModule >> justLoaded [
 { #category : #spec }
 NativizationModule >> imports [
 	^{
-		#Assembly -> #Assembler.
+		#Assembly -> {#Assembler. #NativeCode}.
 		#Compiler -> #AstcodeDecoder.
 		#Intel -> {#AMD64CodeGenerator. #SysVX64ABI. #WinX64ABI. #Registers}.
 		#Kernel -> {

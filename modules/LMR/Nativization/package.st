@@ -16,7 +16,6 @@ Package { #name : #Nativization,
 		'LazyLinker',
 		'LookupLinker',
 		'MessageLinker',
-		"'NativeCode',"
 		'NativizationEvironment',
 		'NativizationPlatform',
 		'SExpressionNativizer',
