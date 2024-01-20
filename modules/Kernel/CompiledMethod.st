@@ -205,7 +205,12 @@ CompiledMethod >> hasBlocks [
 
 { #category : #accessing }
 CompiledMethod >> hasFrame [
-	^(format bitAnd: HasFrame) isZero not
+	^format anyMask: HasFrame
+]
+
+{ #category : #accessing }
+CompiledMethod >> capturesSelf [
+	^format anyMask: CapturesSelf
 ]
 
 { #category : #accessing }
