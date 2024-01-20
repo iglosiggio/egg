@@ -14,6 +14,7 @@ Class {
 		'astcodes',
 		'class',
 		'selector',
+		'nativeCode',
 		'source'
 	],
 	#classVars : [
@@ -444,5 +445,15 @@ CompiledMethod >> updateOptimizedCode [
 { #category : #unclassified }
 CompiledMethod >> validOptimizedCodeAddress [
 	^optimizedCode code _asSmallInteger
+]
+
+{ #category : #accessing }
+CompiledMethod >> nativeCode [
+	^nativeCode
+]
+
+{ #category : #accessing }
+CompiledMethod >> nativeCode: aNativeCode [
+	nativeCode := aNativeCode
 ]
 
