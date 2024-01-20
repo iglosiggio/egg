@@ -18,6 +18,6 @@ AssemblyModule >> justLoaded [
 { #category : #spec }
 AssemblyModule >> imports [
 	^{
-		#Kernel -> {#Dictionary. #OrderedCollection. #ReadWriteStream}}
+		#Kernel -> {#Dictionary. #Module. #OrderedCollection. #ReadWriteStream}}
 ] 
 

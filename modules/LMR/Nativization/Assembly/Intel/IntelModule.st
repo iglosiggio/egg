@@ -33,6 +33,6 @@ IntelModule >> justLoaded [
 IntelModule >> imports [
 	^{
 		#Assembly -> {#ABI. #Assembler. #CodeGenerator}.
-		#Kernel -> {#ByteArray. #CharacterConstants}}
+		#Kernel -> {#ByteArray. #CharacterConstants. #Module}}
 ] 
 

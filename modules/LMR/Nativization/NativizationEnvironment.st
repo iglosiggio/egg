@@ -46,7 +46,7 @@ NativizationEnvironment class >> inlinedMethods [
 		(CompiledMethod -> #(#prepareForExecution #isNativized #nativeCode #blockCount #literalIndexFrom:)).
 		(CompiledBlock -> #(#argumentCount #blockNumber #blockCode #method)).
 		(NativeCode -> #(#code)).
-		(GCSpace -> #(#commitedLimit #nextFree #nextFree:)).
+		"(GCSpace -> #(#commitedLimit #nextFree #nextFree:))."
 		(CharacterArray -> #(#characterAtValid:))}.
 	^self undermethods , (self methodSubset: map)
 ]
@@ -84,8 +84,8 @@ NativizationEnvironment class >> optimizedMethods [
 		(Closure -> #(value value: #value:value:)).
 		(CompiledMethod -> #(blockCount isNativized)).
 		(String -> #(at: #at:put: byteAt: #byteAt:put:)).
-		(GCSpace -> #(lockedAllocateIfPossible: lockedAllocateUnsafe: shallowCopy:)).
-		(Memory -> #(shallowCopy:))}.
+		"(GCSpace -> #(lockedAllocateIfPossible: lockedAllocateUnsafe: shallowCopy:))."
+		"(Memory -> #(shallowCopy:))"}.
 	^self undermethods , (self methodSubset: map)
 ]
 

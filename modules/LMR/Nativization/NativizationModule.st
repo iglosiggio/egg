@@ -29,8 +29,8 @@ NativizationModule >> imports [
 		#Intel -> {#AMD64CodeGenerator. #SysVX64ABI. #WinX64ABI. #Registers}.
 		#Kernel -> {
 			#Array. #ByteArray. #Character. #CharacterArray. #Class. #Closure.
-			#CompiledBlock. #CompiledMethod. #Dictionary. #Error. #Float. #GCSpace.
-			#Halt. #IdentityDictionary. #Integer. #Memory. "#NativeCode." #Number.
-			#Object. #OrderedCollection. #Point. #ProtoObject. #ReadWriteStream.
-			#SendSite. #Set. #Species. #String. #UndefinedObject}}
+			#CompiledBlock. #CompiledMethod. #Dictionary. #Error. #Float. "#GCSpace."
+			#Halt. #IdentityDictionary. #Integer. "#Memory." #Module. "#NativeCode."
+			#Number. #Object. #OrderedCollection. #Point. #ProtoObject.
+			#ReadWriteStream. "#SendSite." #Set. #Species. #String. #UndefinedObject}}
 ] 
