@@ -11,6 +11,7 @@ Class {
 	#instVars : [
 		'format',
 		'optimizedCode',
+		'nativeCode',
 		'method'
 	],
 	#classVars : [

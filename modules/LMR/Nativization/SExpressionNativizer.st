@@ -536,7 +536,8 @@ SExpressionNativizer >> loadAwithTemporaryInStackAt: index [
 SExpressionNativizer >> loadBlockNativeCode [
 	| block nativeCode |
 	block := SClosure indexOfSlot: 'block'.
-	nativeCode := SCompiledBlock indexOfSlot: 'nativeCode'.
+	"FIXME!"
+	nativeCode := CompiledBlock indexOfSlot: 'nativeCode'.
 	ir
 		loadMwithRindex: block;
 		loadMwithMindex: nativeCode
