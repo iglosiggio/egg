@@ -24,9 +24,9 @@ SBlockNode >> beInlined [
 SBlockNode >> buildBlock [
 	| block |
 	self isInlined ifTrue: [ ^ nil ].
-	block := SCompiledBlock new.
+	block := CompiledBlock new.
 	^ block
-		  id: index;
+		  blockNumber: index;
 		  argumentCount: arguments size;
 		  tempCount: scope stackSize;
 		  environmentCount: scope environmentSize;

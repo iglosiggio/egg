@@ -20,7 +20,6 @@ CompilerModule >> justLoaded [
 { #category : #spec }
 CompilerModule >> imports [
 	^{
-		#Kernel -> #Error. #Kernel -> #ByteArray. #Kernel -> #Module. #Kernel -> #NumberParser. #Kernel -> #Species.
-		#Kernel -> #OrderedDictionary
+		#Kernel -> {#CompiledBlock. #Error. #ByteArray. #Module. #NumberParser. #Species. #OrderedDictionary}
 	}
 ] 
