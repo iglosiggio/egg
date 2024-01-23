@@ -33,3 +33,8 @@ SelfBinding >> name [
 SelfBinding class >> decodeUsing: anAstcodeDecoder [
 	^self new
 ]
+
+{ #category : #visiting }
+SelfBinding >> valueWithin: anEvaluationContext [
+        ^ anEvaluationContext receiver
+]

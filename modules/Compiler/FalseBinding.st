@@ -18,3 +18,8 @@ FalseBinding >> name [
 FalseBinding >> value [
 	^false
 ]
+
+{ #category : #visiting }
+FalseBinding >> valueWithin: anEvaluationContext [
+        ^ anEvaluationContext falseLiteral
+]

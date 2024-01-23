@@ -58,3 +58,8 @@ ArgumentBinding >> isInlined [
 ArgumentBinding class >> decodeUsing: anAstcodeDecoder [
 	^anAstcodeDecoder decodeArgument
 ]
+
+{ #category : #visiting }
+ArgumentBinding >> valueWithin: anEvaluationContext [
+        ^ anEvaluationContext argumentAt: position in: environment
+]

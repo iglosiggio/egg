@@ -18,3 +18,8 @@ NilBinding >> name [
 NilBinding >> value [
 	^nil
 ]
+
+{ #category : #visiting }
+NilBinding >> valueWithin: anEvaluationContext [
+        ^ anEvaluationContext nilLiteral
+]

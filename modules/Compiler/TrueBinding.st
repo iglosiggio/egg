@@ -18,3 +18,8 @@ TrueBinding >> name [
 TrueBinding >> value [
 	^true
 ]
+
+{ #category : #visiting }
+TrueBinding >> valueWithin: anEvaluationContext [
+        ^ anEvaluationContext trueLiteral
+]
