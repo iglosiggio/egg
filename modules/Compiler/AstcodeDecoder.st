@@ -191,7 +191,8 @@ AstcodeDecoder >> decodeLiteral [
 		ifTrue: [ self nextLiteralInteger ]
 		ifFalse: [ self literalAt: index ].
 	^ SLiteralNode new
-		value: value
+		value: value;
+		index: index.
 ]
 
 { #category : #public }

@@ -2,7 +2,8 @@ Class {
 	#name : #SLiteralNode,
 	#superclass : #SParseNode,
 	#instVars : [
-		'value'
+		'value',
+		'index'
 	],
 	#category : #'Powerlang-Core-SCompiler-Smalltalk-Parser'
 }
@@ -43,8 +44,18 @@ SLiteralNode >> value [
 ]
 
 { #category : #evaluating }
+SLiteralNode >> index [
+	^index
+]
+
+{ #category : #evaluating }
 SLiteralNode >> value: anObject [
 	value := anObject
+]
+
+{ #category : #evaluating }
+SLiteralNode >> index: aSmallInteger [
+	index := aSmallInteger
 ]
 
 { #category : #decoding }
