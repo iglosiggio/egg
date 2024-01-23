@@ -76,7 +76,7 @@ Assembler >> addLabel: label to: location [
 Assembler >> addLiteral: anObject [
 	| index |
 	index := literals
-		identityIndexOf: anObject
+		indexOfIdentical: anObject
 		ifAbsent: [ literals
 				add: anObject;
 				size ].
