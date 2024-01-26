@@ -26,7 +26,12 @@ LocalBinding >> declaration: anIdentifierNode [
 
 { #category : #accessing }
 LocalBinding >> environment [
-	^environment index
+	^environment
+]
+
+{ #category : #accessing }
+LocalBinding >> environment: anEnvironment [
+	environment := anEnvironment
 ]
 
 { #category : #accessing }

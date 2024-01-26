@@ -57,7 +57,6 @@ AstcodeEncoder class >> initializeBindingIds [
 		at: #PopRid put: 51
 ]
 
-
 { #category : #'class initialization' }
 AstcodeEncoder class >> initializeClosureElementIds [
 	| named |

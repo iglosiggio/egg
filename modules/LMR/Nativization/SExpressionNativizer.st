@@ -182,7 +182,7 @@ SExpressionNativizer >> argumentAt: index in: envIndex [
 
 { #category : #services }
 SExpressionNativizer >> argumentCount [
-	^activeScript argumentCount
+	^activeScript arguments size
 ]
 
 { #category : #services }

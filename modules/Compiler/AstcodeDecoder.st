@@ -277,8 +277,10 @@ AstcodeDecoder >> nextBoolean [
 AstcodeDecoder >> nextEnvironment [
 	| value |
 	value := self nextInteger.
-	^ value != -2
-		ifTrue: [ value ]
+	value = -2 ifTrue: [ ^ ArgumentEnvironment new ].
+	value = -1 ifTrue: [ ^ InlinedArgEnvironment new ].
+	value ifNil: [ self _halt ].
+	^ ArrayEnvironment new index: value.
 ]
 
 { #category : #public }

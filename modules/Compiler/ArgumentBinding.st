@@ -61,5 +61,5 @@ ArgumentBinding class >> decodeUsing: anAstcodeDecoder [
 
 { #category : #visiting }
 ArgumentBinding >> valueWithin: anEvaluationContext [
-        ^ anEvaluationContext argumentAt: position in: self environment
+        ^ anEvaluationContext argumentAt: index in: self environmentIndex
 ]
