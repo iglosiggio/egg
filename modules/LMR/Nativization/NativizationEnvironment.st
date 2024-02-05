@@ -21,7 +21,8 @@ NativizationEnvironment class >> forTesting [
 	^NativizationEnvironment new
 		initialize;
 		"platform: NativizationPlatform x86_64_linux_gnu."
-		platform: NativizationPlatform x86_64_win32.
+		platform: NativizationPlatform x86_64_win32;
+		setupMessageLinkers.
 ]
 
 { #category : #accessing }
@@ -136,7 +137,16 @@ NativizationEnvironment >> initialize [
 	inlinedMethods := OrderedCollection new.
 	messageLinker := CompositeMessageLinker new.
 	messageLinker add: InlineMessageLinker new.
-	globals := Array new: self class globalNames size.
+	"Should be kept in sync with NativizationEnvironment>>globalNames"
+	globals := {
+		NativeCode new code: 'Lookup Placeholder'.
+		NativeCode new code: 'LookupSuper Placeholder'.
+		NativeCode new code: 'WriteBarrier placeholder'.
+		NativeCode new code: 'Safepoint placeholder'.
+		NativeCode new code: 'SmallIntegerBehavior placholder'.
+		NativeCode new code: 'Invoke placeholder'.
+		NativeCode new code: 'DebuggableLookup placeholder'.
+		NativeCode new code: 'DebuggableLookupSuper placeholder'}
 	"self
 		initializeGlobals;
 		inlinedMethods: self class inlinedMethods;
