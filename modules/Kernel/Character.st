@@ -778,7 +778,8 @@ Character >> isUnicode [
 
 { #category : #testing }
 Character >> isUppercase [
-	^ActiveLocale isUppercase: self
+	^ self between: $A and: $Z
+	"^ActiveLocale isUppercase: self"
 ]
 
 { #category : #testing }
