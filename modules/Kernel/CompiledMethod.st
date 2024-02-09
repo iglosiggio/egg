@@ -518,4 +518,3 @@ CompiledMethod >> nativeCode [
 CompiledMethod >> nativeCode: aNativeCode [
 	nativeCode := aNativeCode
 ]
-

@@ -326,3 +326,12 @@ CompiledBlock >> valueSelector [
 	^#valueWithArguments:
 ]
 
+{ #category : #accessing }
+CompiledBlock >> nativeCode [
+	^nativeCode
+]
+
+{ #category : #accessing }
+CompiledBlock >> nativeCode: aNativeCode [
+	nativeCode := aNativeCode
+]
