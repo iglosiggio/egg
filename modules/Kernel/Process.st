@@ -14,14 +14,6 @@ Class {
 	#category : #Kernel
 }
 
-{ #category : #evaluation }
-Process >> evaluate: aBlock ensuring: ensuredBlock  [
-	| result |
-	result := aBlock value.
-	ensuredBlock value.
-	^result
-]
-
 { #category : #private }
 Process >> wantsToStepInto [
 	| answer |
