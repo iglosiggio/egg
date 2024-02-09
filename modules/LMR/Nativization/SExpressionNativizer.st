@@ -187,7 +187,7 @@ SExpressionNativizer >> argumentCount [
 
 { #category : #services }
 SExpressionNativizer >> argumentInEnvironmentAt: index [
-	ir loadRwithEindex: index + SClosure instSize
+	ir loadRwithEindex: index + Closure instSize
 ]
 
 { #category : #services }
@@ -476,10 +476,10 @@ SExpressionNativizer >> loadAwithArgument: index in: envIndex [
 SExpressionNativizer >> loadAwithArgumentInEnvironment: envIndex at: index [
 	| offset |
 	envIndex = 0
-		ifTrue: [ ir loadAwithEindex: index + SClosure instSize ]
+		ifTrue: [ ir loadAwithEindex: index + Closure instSize ]
 		ifFalse: [ offset := activeScript offsetOfEnvironment: envIndex.
 			ir
-				loadAwithEindex: envIndex + SClosure instSize;
+				loadAwithEindex: envIndex + Closure instSize;
 				loadAwithAindex: index + offset ]
 ]
 
@@ -518,7 +518,7 @@ SExpressionNativizer >> loadAwithTemporaryInEnvironment: envIndex at: index [
 		ifTrue: [offset := activeScript offsetOfCurrentEnvironment. ir loadAwithEindex: index + offset ]
 		ifFalse: [ offset := activeScript offsetOfEnvironment: envIndex.
 			ir
-				loadAwithEindex: envIndex + SClosure instSize;
+				loadAwithEindex: envIndex + Closure instSize;
 				loadAwithAindex: index + offset ]
 ]
 
@@ -535,7 +535,7 @@ SExpressionNativizer >> loadAwithTemporaryInStackAt: index [
 { #category : #services }
 SExpressionNativizer >> loadBlockNativeCode [
 	| block nativeCode |
-	block := SClosure indexOfSlot: 'block'.
+	block := Closure indexOfSlot: 'block'.
 	"FIXME!"
 	nativeCode := CompiledBlock indexOfSlot: 'nativeCode'.
 	ir
@@ -550,7 +550,7 @@ SExpressionNativizer >> loadBlockSelf: aCompiledBlock [
 		ifTrue: [ offset := aCompiledBlock capturesHome
 				ifTrue: [ 1 ]
 				ifFalse: [ 0 ].
-			ir loadSwithRindex: SClosure instSize + 1 + offset ]
+			ir loadSwithRindex: Closure instSize + 1 + offset ]
 		ifFalse: [ ir loadSwithNil ].
 	ir pushS
 ]
@@ -740,7 +740,7 @@ SExpressionNativizer >> temporaryInEnvironment: envIndex at: index [
 		ifFalse: [ 
 			offset := activeScript offsetOfEnvironment: envIndex.
 			ir
-				loadRwithEindex: envIndex + SClosure instSize ;
+				loadRwithEindex: envIndex + Closure instSize ;
 				loadRwithRindex: index + offset]
 ]
 
@@ -754,7 +754,7 @@ SExpressionNativizer >> temporaryInEnvironment: envIndex atPut: index [
 				pushE ]
 		ifFalse: [ offset := activeScript offsetOfEnvironment: envIndex.
 			ir
-				loadTwithEindex: envIndex + SClosure instSize ;
+				loadTwithEindex: envIndex + Closure instSize ;
 				storeRinTindex: index + offset;
 				pushT ].
 	self emitWriteBarrier
