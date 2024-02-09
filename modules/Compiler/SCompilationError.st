@@ -39,7 +39,7 @@ SCompilationError >> compiler: aCompiler [
 
 { #category : #accessing }
 SCompilationError >> description: aString [
-	messageText := aString
+	description := aString
 ]
 
 { #category : #accessing }
