@@ -611,3 +611,9 @@ Species >> zero: size bytesOf: object [
 	object _zeroSlots: (size bitShift: 0 - WordSizeShift)
 ]
 
+{ #category : #queries }
+Species >> indexOfSlot: name [
+	| instVars |
+	instVars := self allInstVarNames.
+	^instVars indexOf: name ifAbsent: 0
+]
