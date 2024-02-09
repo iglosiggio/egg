@@ -141,11 +141,21 @@ CompiledBlock >> blockNumber: anInteger [
 	format := format bitsAt: Id put: anInteger
 ]
 
+{ #category : #testing }
+CompiledBlock >> capturesHome [
+	^format isOnBit: CapturesHome
+]
+
 { #category : #accessing }
 CompiledBlock >> capturesHome: aBoolean [
 	format := aBoolean
 				ifTrue: [ format bitOr: CapturesHome ]
 				ifFalse: [ format bitClear: CapturesHome ]
+]
+
+{ #category : #testing }
+CompiledBlock >> capturesSelf [
+	^format isOnBit: CapturesSelf
 ]
 
 { #category : #accessing }
