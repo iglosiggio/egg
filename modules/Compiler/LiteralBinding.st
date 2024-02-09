@@ -8,8 +8,3 @@ Class {
 LiteralBinding >> isLiteral [
 	^true
 ]
-
-{ #category : #decoding }
-LiteralBinding class >> decodeUsing: anAstcodeDecoder [
-	^self new
-]

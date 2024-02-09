@@ -22,23 +22,23 @@ AstcodeDecoder class >> initialize [
 	NodeTypes := Dictionary new.
 	BindingTypes := Dictionary new.
 	NodeTypes
-		at: AssignmentId put: SAssignmentNode;
-		at: BlockId put: SBlockNode;
-		at: CascadeId put: SCascadeNode;
-		at: LiteralId put: SLiteralNode;
-		at: IdentifierId put: SIdentifierNode;
-		at: MessageId put: SMessageNode;
-		at: ReturnId put: SReturnNode.
+		at: AssignmentId put: SAssignment;
+		at: BlockId put: SBlock;
+		at: CascadeId put: SCascade;
+		at: LiteralId put: SLiteral;
+		at: IdentifierId put: SIdentifier;
+		at: MessageId put: SMessage;
+		at: ReturnId put: SReturn.
 	BindingTypes
-		at: NilId put: NilBinding;
-		at: TrueId put: TrueBinding;
-		at: FalseId put: FalseBinding;
-		at: ArgumentId put: ArgumentBinding;
-		at: TemporaryId put: TemporaryBinding;
-		at: SelfId put: SelfBinding;
-		at: SuperId put: SuperBinding;
-		at: DynamicVarId put: DynamicBinding;
-		at: NestedDynamicVarId put: NestedDynamicBinding
+		at: NilId put: SNilBinding;
+		at: TrueId put: STrueBinding;
+		at: FalseId put: SFalseBinding;
+		at: ArgumentId put: SArgumentBinding;
+		at: TemporaryId put: STemporaryBinding;
+		at: SelfId put: SSelfBinding;
+		at: SuperId put: SSuperBinding;
+		at: DynamicVarId put: SDynamicBinding;
+		at: NestedDynamicVarId put: SNestedDynamicBinding
 ]
 
 { #category : #'class initialization' }
@@ -108,7 +108,7 @@ AstcodeDecoder >> builder: aRuntime [
 
 { #category : #public }
 AstcodeDecoder >> decodeArgument [
-	^ ArgumentBinding new
+	^ SArgumentBinding new
 		index: self nextInteger;
 		environment: self nextEnvironment
 ]
@@ -116,7 +116,7 @@ AstcodeDecoder >> decodeArgument [
 { #category : #public }
 AstcodeDecoder >> decodeAssignment [
 	| assignment assignees |
-	assignment := SAssignmentNode new.
+	assignment := SAssignment new.
 	
 	assignees := self nextExpressionArray.
 	assignment expression: self nextExpression.
@@ -128,7 +128,7 @@ AstcodeDecoder >> decodeAssignment [
 AstcodeDecoder >> decodeBlock [
 
 	| expression inlined block index code |
-	expression := SBlockNode new.
+	expression := SBlock new.
 	inlined := self nextBoolean.
 	inlined
 		ifTrue: [ expression inlinedArgs: self nextArray ]
@@ -139,6 +139,7 @@ AstcodeDecoder >> decodeBlock [
 				code := builder newExecutableCodeFor: expression.
 				builder blockExecutableCode: block put: code ].
 			expression
+				compiledCode: block;
 				index: index;
 				capturedVariables: self nextArray ].
 	expression statements: self nextExpressionArray.
@@ -148,12 +149,12 @@ AstcodeDecoder >> decodeBlock [
 { #category : #public }
 AstcodeDecoder >> decodeCascade [
 	| cascade receiver messages message count |
-	cascade := SCascadeNode new.
+	cascade := SCascade new.
 	receiver := self nextExpression.
 	count := self nextInteger.
 	messages := (1 to: count)
 		collect: [ :i | 
-			message := SCascadeMessageNode decodeUsing: self.
+			message := SCascadeMessage decodeUsing: self.
 			message cascade: cascade ].
 	^ cascade
 		receiver: receiver;
@@ -165,14 +166,14 @@ AstcodeDecoder >> decodeCascadeMessage [
 	| selector arguments |
 	selector := self nextSymbol.
 	arguments := self nextExpressionArray.
-	^ SCascadeMessageNode new
+	^ SCascadeMessage new
 		selector: selector;
 		arguments: arguments
 ]
 
 { #category : #public }
 AstcodeDecoder >> decodeDynamicVar [
-	^ DynamicBinding new name: self nextSymbol
+	^ SDynamicBinding new name: self nextSymbol
 ]
 
 { #category : #public }
@@ -180,7 +181,7 @@ AstcodeDecoder >> decodeIdentifier [
 	| type binding |
 	type := self bindingTypeOf: self nextInteger.
 	binding := type decodeUsing: self.
-	^ SIdentifierNode new binding: binding
+	^ SIdentifier new binding: binding
 ]
 
 { #category : #public }
@@ -190,9 +191,9 @@ AstcodeDecoder >> decodeLiteral [
 	value := index = 0
 		ifTrue: [ self nextLiteralInteger ]
 		ifFalse: [ self literalAt: index ].
-	^ SLiteralNode new
-		value: value;
-		index: index.
+	^ SLiteral new
+		index: index;
+		value: value
 ]
 
 { #category : #public }
@@ -202,7 +203,7 @@ AstcodeDecoder >> decodeMessage [
 	selector := self nextSymbol.
 	receiver := self nextExpression.
 	arguments := self nextExpressionArray.
-	^ SMessageNode new
+	^ SMessage new
 		receiver: receiver;
 		selector: selector;
 		arguments: arguments;
@@ -215,20 +216,21 @@ AstcodeDecoder >> decodeMethod [
 	type := stream next.
 	type != MethodId
 		ifTrue: [ self error: 'method astcode expected' ].
-	node := SMethodNode new.
+	node := SMethod new.
 	next := stream peek.
 	next = PragmaId
 		ifTrue: [ stream next.
-			pragma := SPragmaNode new name: self nextSymbolOrNil.
+			pragma := SPragma new name: self nextSymbolOrNil.
 			node pragma: pragma ].
 	node
+		compiledCode: method;
 		statements: self nextExpressionArray.
 	^ node
 ]
 
 { #category : #public }
 AstcodeDecoder >> decodeNestedDynamicVar [
-	^ NestedDynamicBinding new
+	^ SNestedDynamicBinding new
 		name:
 			self nextSymbol.
 
@@ -239,14 +241,14 @@ AstcodeDecoder >> decodeReturn [
 	| expression local |
 	local := self nextBoolean.
 	expression := self nextExpression.
-	^ SReturnNode new
+	^ SReturn new
 		local: local;
 		expression: expression
 ]
 
 { #category : #public }
 AstcodeDecoder >> decodeTemporary [
-	^ TemporaryBinding new
+	^ STemporaryBinding new
 		index: self nextInteger;
 		environment: self nextEnvironment
 ]
@@ -277,10 +279,8 @@ AstcodeDecoder >> nextBoolean [
 AstcodeDecoder >> nextEnvironment [
 	| value |
 	value := self nextInteger.
-	value = -2 ifTrue: [ ^ ArgumentEnvironment new ].
-	value = -1 ifTrue: [ ^ InlinedArgEnvironment new ].
-	self ASSERT: index notNil.
-	^ ArrayEnvironment new index: value.
+	^ value != -2
+		ifTrue: [ value ]
 ]
 
 { #category : #public }

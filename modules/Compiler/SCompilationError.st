@@ -5,8 +5,7 @@ Class {
 		'compiler',
 		'resumable',
 		'retryable',
-		'stretch',
-		'messageText'
+		'stretch'
 	],
 	#category : #'Powerlang-Core-SCompiler'
 }

@@ -32,13 +32,3 @@ TemporaryBinding >> initialize [
 TemporaryBinding >> isTemporary [
 	^true
 ]
-
-{ #category : #decoding }
-TemporaryBinding class >> decodeUsing: anAstcodeDecoder [
-	^anAstcodeDecoder decodeTemporary
-]
-
-{ #category : #visiting }
-TemporaryBinding >> valueWithin: anEvaluationContext [
-        ^ anEvaluationContext temporaryAt: position in: environment
-]

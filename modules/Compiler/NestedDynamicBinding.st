@@ -21,8 +21,3 @@ NestedDynamicBinding >> literal [
 NestedDynamicBinding >> printNameOn: aStream [
 	name do: [ :n | aStream nextPutAll: n ] separatedBy: [ aStream nextPut: $. ]
 ]
-
-{ #category : #decoding }
-NestedDynamicBinding class >> decodeUsing: anAstcodeDecoder [
-	^ anAstcodeDecoder decodeNestedDynamicVar
-]
